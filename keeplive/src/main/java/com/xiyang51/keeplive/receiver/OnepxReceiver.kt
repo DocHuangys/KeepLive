@@ -13,7 +13,7 @@ class OnepxReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.action == Intent.ACTION_SCREEN_OFF) {    //屏幕关闭的时候接受到广播
-            appIsForeground = IsForeground(context)
+            appIsForeground = isForeground(context)
             try {
                 val it = Intent(context, OnePixelActivity::class.java)
                 it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -39,7 +39,7 @@ class OnepxReceiver : BroadcastReceiver() {
         }
     }
 
-    fun IsForeground(context: Context): Boolean {
+   private fun isForeground(context: Context): Boolean {
         val am = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
         val tasks = am.getRunningTasks(1)
         if (tasks != null && !tasks.isEmpty()) {
